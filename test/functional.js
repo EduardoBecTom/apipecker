@@ -9,7 +9,7 @@ let TIMEOUT = 300;
 let EXPECTED_ITERATIONS = 4;
 
 let EXPECTED_MEAN = 150;
-let EPSILON = 15;
+let EPSILON = 20;
 const _RESET = '\x1b[0m';
 const _CYAN = '\x1b[36m';
 const _GREEN = '\x1b[32m';

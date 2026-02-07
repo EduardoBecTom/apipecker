@@ -381,6 +381,7 @@ function run(config){
                         if (continuityHandler && continuityHandler instanceof Function && !continuityHandler(requestLotResult)){
                             keepGoing = false;
                             timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
+                            log(`Continuity handler has indicated to stop the execution. Stopping...`);
                         }
                         harvester(requestLotResult);
                     }
