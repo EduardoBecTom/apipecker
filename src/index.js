@@ -65,7 +65,6 @@ function run(config){
     const continuityHandler = config.continuityHandler || {};
     let keepGoing = true;
     let timeoutIds = [];
-    let stop = false;
 
     try{
         
