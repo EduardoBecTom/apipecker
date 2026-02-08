@@ -20,7 +20,7 @@ function myUrlBuilder(user,iteration){
 
     var url = "http://localhost:3000/api/v1/stress/"+EXPECTED_MEAN;
     
-    if(iteration === 4)
+    if(iteration >= 4)
         url = "http://localhost:3000/api/v1/stress/"+(TIMEOUT+100);
 
     return url;

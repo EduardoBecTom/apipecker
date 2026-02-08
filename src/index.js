@@ -383,9 +383,10 @@ function run(config){
                             log(`Continuity handler has indicated to stop the execution. Stopping...`);
                         }
                         harvester(requestLotResult);
+                        resolve(requestLotResult);
                     }
                     
-                    resolve(requestLotResult);
+                    resolve();
                     
                 })
                 .catch((err) => {
@@ -407,8 +408,9 @@ function run(config){
             log(`  ITERATION ERROR --> ${_RED}${it}: ${err}${_RESET}`);
             remainingIterations--;
             log(`       Remaining Iterations: ${remainingIterations}`);
-            if (iterationResults.length >= remainingIterations) {
+            if (iterationResults.length >= remainingIterations ) {
                 log(`\nResult:`);
+                log(`Launched from resquestLot`);
                 var results = {};              
                 if(iterationResults.length > 0){
                     results = computeFullStats(iterationResults);
