@@ -410,7 +410,6 @@ function run(config){
             log(`       Remaining Iterations: ${remainingIterations}`);
             if (iterationResults.length >= remainingIterations ) {
                 log(`\nResult:`);
-                log(`Launched from resquestLot`);
                 var results = {};              
                 if(iterationResults.length > 0){
                     results = computeFullStats(iterationResults);
