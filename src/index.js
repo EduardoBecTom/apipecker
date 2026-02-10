@@ -377,10 +377,9 @@ function run(config){
                         "result": computeLotStats(results)
                     };
                     if (keepGoing){
-                        if (continuityHandler && continuityHandler instanceof Function && !continuityHandler(requestLotResult)){
+                        if (continuityHandler && continuityHandler instanceof Function && continuityHandler(requestLotResult)===false){
                             keepGoing = false;
                             timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
-                            log(`Continuity handler has indicated to stop the execution. Stopping...`);
                         }
                         harvester(requestLotResult);
                         resolve(requestLotResult);
@@ -447,10 +446,16 @@ function run(config){
             log("\nResults:");
             const results = computeFullStats(iterationResults);
             log(JSON.stringify(results.summary, null, 2));
+            if (!keepGoing){
+            log(`Continuity handler has indicated to stop the execution. Stopping...`);
+            }
             results.logs = logs;
 
             if(resultsHandler)
                 resultsHandler(results); 
+            if (!keepGoing){
+                process.exit(0);
+            }
         }
     };
 
