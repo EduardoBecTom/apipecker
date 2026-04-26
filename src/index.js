@@ -65,7 +65,8 @@ function run(config){
     const continuityHandler = config.continuityHandler || {};
     let keepGoing = true;
     let timeoutIds = [];
-
+    //streamingHandler params
+    const streamingHandler = config.streamingHandler
     try{
         
         if(urlBuilder)
@@ -274,6 +275,17 @@ function run(config){
                         stats["timeout"] = true;
                         resolve(stats);
                         return;
+                    }
+                    parsedChunk = chunk.toString();
+                    elapsed = getDuration(begin);
+                    dbg(`[createRequestPromise->request->onData][${id}][${iteration}][+${elapsed}] chunk=${parsedChunk}`);
+                    if(streamingHandler){
+                        streamingHandler({
+                            chunk: parsedChunk,
+                            time: elapsed,
+                            user : id,
+                            iteration: iteration
+                        });
                     }
                     
                     data += chunk;
